@@ -1,0 +1,192 @@
+<h1>HelloSign Test App</h1>
+<div id="links">
+  <%= @response %>
+  <h4>Account</h4>
+  <ul>
+    <li>
+      <%= link_to 'Get Account', account_path %>
+    </li>
+    <li>
+      Update Account:
+      <%= form_tag("/update-account", method: "post") do %>
+      <%= text_field_tag(:callback_url, nil, :placeholder => 'Callback URL') %>
+      <%= submit_tag("Update Account") %>
+      <% end %>
+    </li>
+    <li>
+      Verify Account:
+      <%= form_tag("/verify-account", method: "post") do %>
+      <%= text_field_tag(:email, nil, :placeholder => 'Email') %>
+      <%= submit_tag("Verify Account") %>
+      <% end %>
+    </li>
+  </ul>
+  <h4>Non-Embedded Signature Requests</h4>
+  <ul>
+    <li>
+      <%= form_tag("/signature-request", method: "get") do %>
+      <%= text_field_tag(:request_id, nil, :placeholder => 'Request ID') %>
+      <%= submit_tag("Signature Request Info") %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to 'All Signature Requests', all_requests_path %>
+    </li>
+    <li>
+      <%= link_to 'Send Signature Request', send_request_path, method: "post" %>
+    </li>
+    <li>
+      <%= link_to 'Update Signature Request', update_email_path %>
+    </li>
+    <li>
+      <%= link_to 'Send Request via Template', template_request_path %>
+    </li>
+    <li>Send Reminder:
+      <%= form_tag("/reminder", method: "post") do %>
+        <%= text_field_tag(:signature_id, nil, :placeholder => 'Signature ID') %>
+        <%= text_field_tag(:email, nil, :placeholder => 'Email') %>
+        <%= submit_tag("Send Reminder") %>
+      <% end %>
+    </li>
+    <li>Update Email:
+      <%= form_tag("/update-email", method: "post") do %>
+        <%= text_field_tag(:signature_request_id, nil, :placeholder => 'Signature Request ID') %>
+        <%= text_field_tag(:signature_id, nil, :placeholder => 'Signature ID') %>
+        <%= text_field_tag(:new_email, nil, :placeholder => 'New Email') %>
+        <%= submit_tag("Update Email") %>
+      <% end %>
+    </li>
+    <li>Cancel Signature Request:
+      <%= form_tag("/cancel", method: "post") do %>
+        <%= text_field_tag(:request_id, nil, :placeholder => 'Request ID') %>
+        <%= submit_tag("Cancel Signature Request") %>
+      <% end %>
+    </li>
+    <li>
+      Download File:
+      <%= form_tag("/file", method: "get") do %>
+        <%= text_field_tag(:request_id, nil, :placeholder => 'Request ID') %>
+        <%= submit_tag("Get File") %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to 'Create Unclaimed Draft', unclaimed_draft_path %>
+    </li>
+  </ul>
+  <h4>Templates</h4>
+  <ul>
+    <li>
+      <%= form_tag("/templates/info", method: "get") do %>
+        <%= text_field_tag(:template_id, nil, :placeholder => 'Template ID') %>
+        <%= submit_tag("Get Template") %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to 'Update Template', templates_update_path %>
+    </li>
+    <li>
+      <%= link_to 'List Templates', templates_list_path %>
+    </li>
+    <li>
+      <%= form_tag("/templates/add-access", method: "post") do %>
+        <%= text_field_tag(:template_id, nil, :placeholder => 'Template ID') %>
+        <%= text_field_tag(:email, nil, :placeholder => 'Email') %>
+        <%= submit_tag("Add User Access") %>
+      <% end %>
+    </li>
+    <li>
+      <%= form_tag("/templates/remove-access", method: "post") do %>
+        <%= text_field_tag(:template_id, nil, :placeholder => 'Template ID') %>
+        <%= text_field_tag(:email, nil, :placeholder => 'Email') %>
+        <%= submit_tag("Remove User Access") %>
+      <% end %>
+    </li>
+    <li>
+      <%= form_tag("/templates/delete", method: "post") do %>
+        <%= text_field_tag(:template_id, nil, :placeholder => 'Template ID') %>
+        <%= submit_tag("Delete Template") %>
+      <% end %>
+    </li>
+    <li>
+      Download Template Files:
+      <%= form_tag("/templates/download", method: "get") do %>
+        <%= text_field_tag(:template_id, nil, :placeholder => 'Template ID') %>
+        <%= submit_tag("Get Template File") %>
+      <% end %>
+    </li>
+  </ul>
+  <h4>Team</h4>
+  <ul>
+    <li>
+      <%= link_to 'Get Team', teams_path %>
+    </li>
+    <li>
+      <%= form_tag("/teams/new", method: "post") do %>
+        <%= text_field_tag(:name, nil, :placeholder => 'Team Name') %>
+        <%= submit_tag("Create Team") %>
+      <% end %>
+    </li>
+    <li>
+      <%= form_tag("/teams/update", method: "post") do %>
+        <%= text_field_tag(:name, nil, :placeholder => 'Team Name') %>
+        <%= submit_tag("Update Team") %>
+      <% end %>
+    </li>
+    <li>
+      <%= form_tag("/teams/add-user", method: "post") do %>
+        <%= text_field_tag(:email, nil, :placeholder => 'Email') %>
+        <%= submit_tag("Add User to Team") %>
+      <% end %>
+    </li>
+  </ul>
+  <h4>API Apps</h4>
+  <ul>
+    <li>
+      <%= form_tag("/apps/info", method: "get") do %>
+        <%= text_field_tag(:client_id, nil, :placeholder => 'Client ID') %>
+        <%= submit_tag("Get API App") %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to 'List API Apps', apps_list_path %>
+    </li>
+    <li>
+      <%= form_tag("/apps/create", method: "get") do %>
+        <%= text_field_tag(:app_name, nil, :placeholder => 'App Name') %>
+        <%= submit_tag("Create API App") %>
+      <% end %>
+    </li>
+    <li>
+      <%= form_tag("/apps/update", method: "get") do %>
+        <%= text_field_tag(:client_id, nil, :placeholder => 'Client ID') %>
+        <%= text_field_tag(:app_name, nil, :placeholder => 'App Name') %>
+        <%= submit_tag("Update API App") %>
+      <% end %>
+    </li>
+    <li>
+      <%= form_tag("/apps/delete", method: "get") do %>
+        <%= text_field_tag(:client_id, nil, :placeholder => 'Client ID') %>
+        <%= submit_tag("Delete API App") %>
+      <% end %>
+    </li>
+  </ul>
+</div>
+<div id="embedded">
+  <h4>Embedded Endpoints</h4>
+  <ul>
+    <li>
+      <%= link_to 'Embedded Signatures', embeddeds_path %>
+    </li>
+  <ul>
+</div>
+<div>
+  <h4>HelloWorks</h4>
+  <ul>
+    <li>
+      <%= link_to 'Create new HelloWorks Instance', helloworks_new_path, method: :post %>
+    </li>
+    <li>
+      <%= link_to 'v3 HelloWorks Instance', helloworks_v3_new_path %>
+    </li>
+  </ul>
+</div>
